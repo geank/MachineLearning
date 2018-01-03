@@ -12,13 +12,16 @@ private:
     int numberFeatures;
     matrix<double> inputs;
     vector<double> outputs;
+    void scalingFeatures();
+    double range(vector<double> f);
+    double standarDesviation(vector<double> f, double mean);
 public:
     SetTraining();
     SetTraining(int numFeatures);
     SetTraining(int numFeatures, int m);
     matrix<double> getInputs();
     vector<double> getOutputs();
-    void loadData(std::string nameFile);
+    void loadData(std::string nameFile, bool scaling = false);
 };
 
 #endif // SETTRAINING_H

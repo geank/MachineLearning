@@ -1,5 +1,7 @@
 #include "settraining.h"
 #include <fstream>
+#include <boost/numeric/ublas/matrix_proxy.hpp>
+#include <algorithm>
 
 SetTraining::SetTraining(){}
 SetTraining::SetTraining(int numFeatures){
@@ -20,7 +22,7 @@ matrix<double> SetTraining::getInputs(){
 vector<double> SetTraining::getOutputs(){
     return outputs;
 }
-void SetTraining::loadData(std::string nameFile){
+void SetTraining::loadData(std::string nameFile, bool scaling){
     std::ifstream infile(nameFile);
     std::string line;
     int numLine = 1;
@@ -36,5 +38,30 @@ void SetTraining::loadData(std::string nameFile){
 
         numLine++;
     }
+    if(scaling == true)
+        scalingFeatures();
     //std::cout << inputs << std::endl;
+}
+void SetTraining::scalingFeatures(){
+    for(unsigned j = 1; j < inputs.size2(); j ++){
+        matrix_column<matrix<double> > mc(inputs,j);
+        vector<double> col = mc;
+        double mu = (double) (sum(col)/col.size());
+        //double r = standarDesviation(col,mu);
+        double r = range(col);
+
+        for(unsigned i = 0; i < inputs.size1(); i++){
+            inputs(i,j) = (inputs(i,j) - mu) / r;
+        }
+    }
+
+}
+double SetTraining::range(vector<double> f){
+    auto result  = std::minmax_element(f.data().begin(),f.data().end());
+    return (*result.second - *result.first);
+}
+double SetTraining::standarDesviation(vector<double> f, double mu){
+    scalar_vector<double> sv(f.size());
+    vector<double> muv = f - (sv * mu);
+    return sqrt((1.0/(f.size() - 1.0))*inner_prod(muv,muv));
 }

@@ -11,10 +11,10 @@ int main(int argc, char *argv[])
 
     using namespace boost::numeric::ublas;
 
-    SetTraining st = SetTraining(1);
-    st.loadData("test1.data");
-    GradientDescent gd(0.01,st);
-    vector<double> thetas = gd.calculate();
-    std::cout << thetas << std::endl;
+    SetTraining st = SetTraining(2);
+    st.loadData("test2.data",true);
+    /*GradientDescent gd(0.01,st);
+    vector<double> thetas = gd.calculate();*/
+    std::cout << st.getInputs() << std::endl;
     return a.exec();
 }
