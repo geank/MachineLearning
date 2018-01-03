@@ -13,6 +13,7 @@ private:
     matrix<double> inputs;
     vector<double> outputs;
 public:
+    SetTraining();
     SetTraining(int numFeatures);
     SetTraining(int numFeatures, int m);
     matrix<double> getInputs();

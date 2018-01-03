@@ -4,25 +4,17 @@
 #include <boost/numeric/ublas/matrix_proxy.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include "settraining.h"
+#include "gradientdescent.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     using namespace boost::numeric::ublas;
 
-    matrix<double> m (3, 3);
-    vector<double> v (3);
-    for (unsigned i = 0; i < std::min (m.size1 (), v.size ()); ++ i) {
-        for (unsigned j = 0; j < m.size2 (); ++ j)
-            m (i, j) = 3 * i + j;
-        v (i) = i;
-    }
-
-    std::cout << m << std::endl;
-    std::cout << v << std::endl;
-    std::cout << prod(m,v) <<std::endl;
-
-    SetTraining st = SetTraining(8);
-    st.loadData("concrete.data");
+    SetTraining st = SetTraining(1);
+    st.loadData("test1.data");
+    GradientDescent gd(0.01,st);
+    vector<double> thetas = gd.calculate();
+    std::cout << thetas << std::endl;
     return a.exec();
 }
