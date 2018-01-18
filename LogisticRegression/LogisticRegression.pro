@@ -3,7 +3,7 @@ QT -= gui
 
 CONFIG += c++11
 
-TARGET = LinearRegresionOneVariable
+TARGET = LogisticRegression
 CONFIG += console
 CONFIG -= app_bundle
 
@@ -28,8 +28,3 @@ HEADERS += \
     hypothesis.h \
     gradientdescent.h \
     costfunction.h
-
-DISTFILES += \
-    ../build-LinearRegresionOneVariable-Desktop_Qt_5_6_3_MinGW_32bit-Debug/concrete.data \
-    ../build-LinearRegresionOneVariable-Desktop_Qt_5_6_3_MinGW_32bit-Debug/test1.data \
-    ../build-LinearRegresionOneVariable-Desktop_Qt_5_6_3_MinGW_32bit-Debug/test2.data

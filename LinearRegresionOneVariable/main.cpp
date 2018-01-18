@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
 
     SetTraining st = SetTraining(2);
     st.loadData("test2.data",true);
-    /*GradientDescent gd(0.01,st);
-    vector<double> thetas = gd.calculate();*/
-    std::cout << st.getInputs() << std::endl;
+    GradientDescent gd(0.01,st);
+    vector<double> thetas = gd.calculate();
+    std::cout << thetas << std::endl;
     return a.exec();
 }

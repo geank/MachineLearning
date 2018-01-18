@@ -30,7 +30,7 @@ vector<double> GradientDescent::calculate(){
     double j = costFunction.calculate(hh,setTraining.getOutputs());;*/
     double j = 0;
     int i = 0;
-    while (i < 1500){
+    while (i < 400){
         thetas = calculateTheta();
 
         hypothesis.setThetas(thetas);
